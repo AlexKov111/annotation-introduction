@@ -5,7 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
-import telran.beforeeach.annotation.BeforeEach;
+import telran.test.annotation.BeforeEach;
 import telran.test.annotation.Test;
 
 public class TestRunner implements Runnable {
@@ -27,12 +27,12 @@ public class TestRunner implements Runnable {
 				}
 				
 			}
-			System.out.println(namesBefore);
+			System.out.println("List of mtdh's names beforeEach annotated: " + namesBefore);
 			
 			for(Method method: methods) {
 				if(method.isAnnotationPresent(Test.class)) {
 					method.setAccessible(true);
-					callBeforeEach(clazz, namesBefore);
+					callAllBeforeEach(clazz, namesBefore);
 					try {
 						
 						method.invoke(testObj);
@@ -45,7 +45,7 @@ public class TestRunner implements Runnable {
 	
 	}
 
-	private void callBeforeEach(Class<?> clazz, ArrayList<String> namesBefore) {
+	private void callAllBeforeEach(Class<?> clazz, ArrayList<String> namesBefore) {
 		namesBefore.stream().forEach(n -> {
 			try {
 				Method methodBefore = clazz.getDeclaredMethod(n);

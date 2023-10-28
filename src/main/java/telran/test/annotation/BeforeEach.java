@@ -1,4 +1,4 @@
-package telran.beforeeach.annotation;
+package telran.test.annotation;
 
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
